@@ -61,7 +61,7 @@ class sentry::install(){
         timeout => 0, /* sentry syncdb and migration takes a long time, better make the timeout to be infinite */
     }
 
-    file{"$sentry_path/initial_data.json":
+    file{"$sentry_path/initial_data.json": /* for safety */
         ensure => absent,
         require => Exec["sentry_initiate"]
     }
