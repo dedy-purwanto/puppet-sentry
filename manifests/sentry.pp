@@ -17,9 +17,11 @@ class sentry::python(){
     }
 }
 
-class sentry::install(){
+class sentry::install($password, $salt="bf13c0"){
     $sentry_path = "/var/sentry"
     $virtualenv_path = "$sentry_path/virtualenv"
+
+    $hexdigest = sha1("$salt$password")
 
     exec{"sentry_path":
         command => "/bin/mkdir -p $sentry_path",
@@ -68,10 +70,12 @@ class sentry::install(){
         
 }
 
-class sentry(){
+class sentry($password, $salt="bf13c0"){
     class{'sentry::python':}
     class{'sentry::install':
         require => Class['sentry::python']
+        password => $password,
+        salt => $salt,
     }
 
 }
