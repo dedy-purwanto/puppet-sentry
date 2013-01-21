@@ -1,7 +1,5 @@
-class sentry($password, $salt="bf13c0"){
-    class{'sentry::python':}
+class sentry($password, $salt="bf13c0", $method=undef){
     class{'sentry::install':
-        require => Class['sentry::python'],
         password => $password,
         salt => $salt,
     }
