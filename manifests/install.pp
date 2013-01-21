@@ -25,11 +25,6 @@ class sentry::install($password, $salt="bf13c0", $method=undef){
         content => template("sentry/settings.py.erb")
     }
 
-    exec{"sentry_requirements":
-        command => "bash -c 'source $virtualenv_path/bin/activate && pip --timeout=280 install -r $sentry_path/requirements.txt --download-cache=~/.pip/cache'",
-        require => File["$sentry_path/requirements.txt"]
-    }
-
     file{"$sentry_path/initial_data.json":
         ensure => file,
         content => template("sentry/initial_data.json.erb")
