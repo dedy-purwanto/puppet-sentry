@@ -1,30 +1,30 @@
-class sentry::install($password, $salt="bf13c0"){
+class sentry::install($password, $salt="bf13c0", $method=undef){
     $sentry_path = "/var/sentry"
     $virtualenv_path = "$sentry_path/virtualenv"
 
     $hexdigest = sha1("$salt$password")
 
-    exec{"sentry_path":
-        command => "/bin/mkdir -p $sentry_path",
-        creates => $sentry_path
+    file { "$sentry_path":
+        ensure => directory,
     }
 
     file{"$sentry_path/requirements.txt":
         ensure => file,
-        require => Exec[$sentry_path],
         source => "puppet:///modules/sentry/requirements.txt"
+    }
+
+    case $method {
+        'venv': {
+            include sentry::install::venv
+        }
+        'default': {
+            include sentry::install::default
+        }
     }
 
     file{"$sentry_path/settings.py":
         ensure => file,
-        require => Exec[$sentry_path],
         content => template("sentry/settings.py.erb")
-    }
-
-    exec{"virtualenv":
-        command => "virtualenv $virtualenv_path",
-        creates => "$virtualenv_path/bin/activate",
-        require => Exec[$sentry_path]
     }
 
     exec{"sentry_requirements":
@@ -34,7 +34,6 @@ class sentry::install($password, $salt="bf13c0"){
 
     file{"$sentry_path/initial_data.json":
         ensure => file,
-        require => Exec["sentry_requirements"],
         content => template("sentry/initial_data.json.erb")
     }
 
@@ -48,5 +47,4 @@ class sentry::install($password, $salt="bf13c0"){
         ensure => absent,
         require => Exec["sentry_initiate"]
     }
-        
 }
