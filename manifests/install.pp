@@ -8,11 +8,6 @@ class sentry::install($password, $salt="bf13c0", $method=undef){
         ensure => directory,
     }
 
-    file{"$sentry_path/requirements.txt":
-        ensure => file,
-        source => "puppet:///modules/sentry/requirements.txt"
-    }
-
     case $method {
         'venv': {
             include sentry::install::venv

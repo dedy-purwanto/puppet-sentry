@@ -1,5 +1,11 @@
 class sentry::install::default($entry_path, $virtualenv_path) {
 
+    file{"$sentry_path/requirements.txt":
+        ensure => file,
+        source => "puppet:///modules/sentry/requirements.txt"
+    }
+
+
     exec{"virtualenv":
         command => "virtualenv $virtualenv_path",
         creates => "$virtualenv_path/bin/activate",
