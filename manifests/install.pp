@@ -9,11 +9,14 @@ class sentry::install($password, $salt="bf13c0", $method=undef){
     }
 
     case $method {
-        'venv': {
-            include sentry::install::venv
+        'venv', 'default': {
+            class { "sentry::install::$method":
+                sentry_path => $sentry_path,
+                virtualenv_path => $virtualenv_path
+            }
         }
-        'default': {
-            include sentry::install::default
+        default: {
+            fail('please specify an acceptable method out of venv, default')
         }
     }
 
