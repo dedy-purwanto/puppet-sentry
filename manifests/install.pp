@@ -32,12 +32,10 @@ class sentry::install($password, $salt="bf13c0", $method=undef){
 
     exec{"sentry_initiate":
         command => "bash -c 'source $virtualenv_path/bin/activate && sentry --config=$sentry_path/settings.py upgrade --noinput'",
-        require => File["$sentry_path/initial_data.json"],
+        require => [
+            File["$sentry_path/initial_data.json"],
+            Class["sentry::install::$method"]
+        ],
         timeout => 0, /* sentry syncdb and migration takes a long time, better make the timeout to be infinite */
-    }
-
-    file{"$sentry_path/initial_data.json": /* for safety */
-        ensure => absent,
-        require => Exec["sentry_initiate"]
     }
 }
