@@ -1,2 +1,2 @@
 DOCUMENTATION.rdoc: manifests
-	puppet doc --mode rdoc --manifestdir .
+	puppet doc manifests/init.pp > DOCUMENTATION.rdoc

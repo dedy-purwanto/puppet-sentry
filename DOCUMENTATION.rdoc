@@ -22,14 +22,16 @@ This class installs/configures/manages Sentry.
 [*install_method*]
       The installation method used to install sentry.
       Choose from:
-          - venv:    Using python::venv from the module
-                     git://github.com/uggedal/puppet-module-python.git
-          - default: Using virtualenv directly, which will do sudo install
+          [venv]    Using python::venv from the module
+                    https://github.com/uggedal/puppet-module-python
+          [default] Using virtualenv directly, which will do sudo install
 
-Requires:
+=== Requires:
+
   python::venv for install_method 'venv'
 
-Sample Usage:
+=== Sample Usage:
+
    class { 'sentry':
      password       => 's3ntry',
      path           => '/var/sentry',

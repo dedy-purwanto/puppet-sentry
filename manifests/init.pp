@@ -23,7 +23,7 @@
 #       The installation method used to install sentry.
 #       Choose from:
 #           [venv]    Using python::venv from the module
-#                     git://github.com/uggedal/puppet-module-python.git
+#                     https://github.com/uggedal/puppet-module-python
 #           [default] Using virtualenv directly, which will do sudo install
 #
 # === Requires:
