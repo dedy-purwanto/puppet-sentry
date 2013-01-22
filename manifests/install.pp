@@ -4,6 +4,10 @@ class sentry::install($password, $salt="bf13c0", $method=undef){
 
     $hexdigest = sha1("$salt$password")
 
+    $sentry_url_prefix = 'http://sentry.example.com'
+    $sentry_key = '0123456789abcde'
+    $sentry_web_port = 9000
+
     file { "$sentry_path":
         ensure => directory,
     }
