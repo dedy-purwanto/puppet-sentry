@@ -15,9 +15,9 @@ DATABASES = {
     }
 }
 
-<% if @sentry_url_prefix -%>
+<% if @url_prefix -%>
 # No trailing slash!
-SENTRY_URL_PREFIX = '<%= sentry_url_prefix %>'
+SENTRY_URL_PREFIX = '<%= url_prefix %>'
 <% else -%>
 # You should configure the absolute URI to Sentry. It will attempt to guess it
 # if you don't but proxies may interfere with this.
@@ -27,10 +27,10 @@ SENTRY_URL_PREFIX = '<%= sentry_url_prefix %>'
 
 # SENTRY_KEY is a unique randomly generated secret key for your server, and it
 # acts as a signing token
-SENTRY_KEY = '<%= sentry_key %>'
+SENTRY_KEY = '<%= key %>'
 
 SENTRY_WEB_HOST = '0.0.0.0'
-SENTRY_WEB_PORT = <%= sentry_web_port %>
+SENTRY_WEB_PORT = <%= web_port %>
 SENTRY_WEB_OPTIONS = {
     'workers': 3,  # the number of gunicorn workers
 }
