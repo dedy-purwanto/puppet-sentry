@@ -1,12 +1,15 @@
 class sentry::install($password, $salt="bf13c0", $method=undef){
+
+    # $sentry_url_prefix = 'http://sentry.example.com'
+    $sentry_url_prefix = undef
+    $sentry_key = '0123456789abcde'
+    $sentry_web_port = 9000
     $sentry_path = "/var/sentry"
+    $sentry_email = "admin@example.com"
+
     $virtualenv_path = "$sentry_path/virtualenv"
 
     $hexdigest = sha1("$salt$password")
-
-    $sentry_url_prefix = 'http://sentry.example.com'
-    $sentry_key = '0123456789abcde'
-    $sentry_web_port = 9000
 
     file { "$sentry_path":
         ensure => directory,

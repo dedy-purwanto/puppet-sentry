@@ -15,7 +15,7 @@ DATABASES = {
     }
 }
 
-<% if sentry_url_prefix -%>
+<% if @sentry_url_prefix -%>
 # No trailing slash!
 SENTRY_URL_PREFIX = '<%= sentry_url_prefix %>'
 <% else -%>
