@@ -26,7 +26,7 @@ class sentry::config (
     }
 
     exec{"sentry_initiate":
-        command => "bash -c 'source $virtualenv_path/bin/activate && sentry --config=$path/settings.py upgrade --noinput'",
+        command => "bash -c 'source $virtualenv_path/bin/activate && sentry --config=$path/sentry.conf.py upgrade --noinput'",
         require => [
             File["$path/initial_data.json"],
             Class["sentry::install"]
