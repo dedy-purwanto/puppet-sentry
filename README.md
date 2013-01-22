@@ -13,3 +13,8 @@ puppet-sentry handles this problem by providing a predefined superuser
 object in json format, and an extra argument for sentry
 initialization. This way, you can install sentry with a predefined
 superuser without any interaction at all.
+
+documentation
+=============
+
+See the [generated documentation](DOC.rdoc) for this module.
