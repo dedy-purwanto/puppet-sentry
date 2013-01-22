@@ -17,4 +17,4 @@ superuser without any interaction at all.
 documentation
 =============
 
-See the [generated documentation](DOC.rdoc) for this module.
+See the [generated documentation](DOCUMENTATION.rdoc) for this module.

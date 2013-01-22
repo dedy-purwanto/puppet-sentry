@@ -27,9 +27,11 @@
 #           - default: Using virtualenv directly, which will do sudo install
 #
 # === Requires:
+#
 #   python::venv for install_method 'venv'
 #
 # === Sample Usage:
+#
 #    class { 'sentry':
 #      password       => 's3ntry',
 #      path           => '/var/sentry',
