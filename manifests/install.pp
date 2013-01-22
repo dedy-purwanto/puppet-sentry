@@ -24,9 +24,9 @@ class sentry::install($password, $salt="bf13c0", $method=undef){
         }
     }
 
-    file{"$sentry_path/settings.py":
+    file{"$sentry_path/sentry.conf.py":
         ensure => file,
-        content => template("sentry/settings.py.erb")
+        content => template("sentry/sentry.conf.py.erb")
     }
 
     file{"$sentry_path/initial_data.json":
