@@ -30,7 +30,7 @@
 #
 # === Requires
 #
-#   python::venv for *install_method* 'venv'
+# python::venv for *install_method* 'venv'
 #
 # === Sample Usage
 #
