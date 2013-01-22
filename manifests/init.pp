@@ -30,7 +30,8 @@
 #
 # === Requires
 #
-# python::venv for *install_method* 'venv'
+# [python::venv] for *install_method* 'venv'
+# [supervisor]   from https://github.com/plathrop/puppet-module-supervisor
 #
 # === Sample Usage
 #
