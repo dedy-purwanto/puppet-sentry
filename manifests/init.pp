@@ -61,4 +61,7 @@ class sentry (
     web_port   => $web_port,
   }
 
+  class { 'sentry::service':
+    path       => $path
+  }
 }
