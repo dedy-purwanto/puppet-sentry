@@ -1,6 +1,9 @@
 class sentry::install::venv ($sentry_path, $virtualenv_path) {
 
-    include python::venv
+    class { 'python::venv':
+      owner => 'sentry',
+      group => 'sentry'
+    }
 
     python::venv::isolate { "$virtualenv_path":
         requirements => "$sentry_path/requirements.txt",
