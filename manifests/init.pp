@@ -40,12 +40,12 @@
 #      path           => '/var/sentry',
 #      install_method => 'venv'
 #    }
-# 
+#
 class sentry (
-  $password,
-  $salt           = 'bf13c0',
+  $password       = 'youshouldspecifyyourownpassword',
+  $salt           = 'andyourownsalt',
   $path           = '/var/sentry',
-  $key            = '0123456789abcde',
+  $key            = 'andyourownkey0123456789abcde',
   $email          = 'admin@example.com',
   $url_prefix     = undef,
   $web_port       = 9000,
