@@ -17,6 +17,8 @@ class sentry::install (
         ensure => present,
     }
 
+    # python::venv will add this file if not defined, but I prefer to be
+    # explicit
     file { $path:
         ensure => directory,
         owner  => 'sentry',
