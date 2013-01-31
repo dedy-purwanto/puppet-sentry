@@ -18,6 +18,9 @@ DATABASES = {
 <% if @url_prefix -%>
 # No trailing slash!
 SENTRY_URL_PREFIX = '<%= url_prefix %>'
+# see https://github.com/getsentry/sentry/issues/392#issuecomment-5106565
+FORCE_SCRIPT_NAME = '<%= url_prefix %>'
+
 <% else -%>
 # You should configure the absolute URI to Sentry. It will attempt to guess it
 # if you don't but proxies may interfere with this.
