@@ -19,6 +19,8 @@ class sentry::install (
 
     file { $path:
         ensure => directory,
+        owner  => 'sentry',
+        group  => 'sentry',
     }
 
     case $method {
