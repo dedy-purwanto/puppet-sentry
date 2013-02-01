@@ -17,6 +17,11 @@
 # [*url_prefix*]
 #       The url prefix sentry is accessible on.  If undefined, it is guessed,
 #       but when using a proxy you probably want to set this.
+#       This should contain the protocol and hostname part; e.g.
+#       https://myhost
+# [*sub_url*]
+#       The sub url sentry is accessible on on the given url_prefix.
+#       Start with a slash, end without.
 # [*web_port*]
 #       The port the web server will listen on.
 # [*install_method*]
@@ -48,6 +53,7 @@ class sentry (
   $key            = 'andyourownkey0123456789abcde',
   $email          = 'admin@example.com',
   $url_prefix     = undef,
+  $sub_url        = undef,
   $web_port       = 9000,
   $install_method = undef
 ) {
@@ -64,6 +70,7 @@ class sentry (
     key        => $key,
     email      => $email,
     url_prefix => $url_prefix,
+    sub_url    => $sub_url,
     web_port   => $web_port,
   }
 

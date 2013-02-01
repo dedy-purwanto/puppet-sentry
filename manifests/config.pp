@@ -7,6 +7,7 @@ class sentry::config (
   $owner      = 'sentry',
   $group      = 'sentry',
   $url_prefix = undef,
+  $sub_url    = undef,
   $web_port   = 9000
 ) {
 
@@ -22,6 +23,7 @@ class sentry::config (
         content => template("sentry/sentry.conf.py.erb"),
         owner   => $owner,
         group   => $group,
+        notify  => Class['sentry::service'],
     }
 
     file{"$path/initial_data.json":
