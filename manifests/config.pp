@@ -29,15 +29,17 @@ class sentry::config (
     file{"$path/initial_data.json":
         ensure  => file,
         content => template("sentry/initial_data.json.erb"),
+        notify  => Exec['sentry_initiate'],
         owner   => $owner,
         group   => $group
     }
 
     exec{"sentry_initiate":
-        command => "bash -c 'source $virtualenv_path/bin/activate && sentry --config=$path/sentry.conf.py upgrade --noinput'",
-        user   => $owner,
-        group  => $group,
-        require => [
+        command     => "bash -c 'source $virtualenv_path/bin/activate && sentry --config=$path/sentry.conf.py upgrade --noinput'",
+        user        => $owner,
+        group       => $group,
+        refreshonly => true,
+        require     => [
             File["$path/initial_data.json"],
             Class["sentry::install"]
         ],
