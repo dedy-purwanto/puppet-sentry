@@ -24,6 +24,8 @@
 #       Start with a slash, end without.
 # [*web_port*]
 #       The port the web server will listen on.
+# [*workers*]
+#       The number of gunicorn workers to start
 # [*install_method*]
 #       The installation method used to install sentry.
 #       Choose from:
@@ -55,6 +57,7 @@ class sentry (
   $url_prefix     = undef,
   $sub_url        = undef,
   $web_port       = 9000,
+  $workers        = 3,
   $install_method = undef
 ) {
 
@@ -72,6 +75,7 @@ class sentry (
     url_prefix => $url_prefix,
     sub_url    => $sub_url,
     web_port   => $web_port,
+    workers    => $workers,
   }
 
   class { 'sentry::service':

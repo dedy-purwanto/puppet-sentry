@@ -8,7 +8,8 @@ class sentry::config (
   $group      = 'sentry',
   $url_prefix = undef,
   $sub_url    = undef,
-  $web_port   = 9000
+  $web_port   = 9000,
+  $workers    = 3
 ) {
 
     include sentry::install
@@ -39,6 +40,7 @@ class sentry::config (
         user        => $owner,
         group       => $group,
         refreshonly => true,
+        logoutput   => on_failure,
         require     => [
             File["$path/initial_data.json"],
             Class["sentry::install"]
