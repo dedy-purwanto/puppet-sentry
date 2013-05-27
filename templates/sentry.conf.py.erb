@@ -21,6 +21,7 @@ SENTRY_URL_PREFIX = '<%= url_prefix %><%= sub_url %>'
 # see https://github.com/getsentry/sentry/issues/392#issuecomment-5106565
 <% if @sub_url -%>
 FORCE_SCRIPT_NAME = '<%= sub_url %>'
+SESSION_COOKIE_PATH = '<%= sub_url %>'
 <% end -%>
 
 <% else -%>
@@ -42,3 +43,6 @@ SENTRY_WEB_OPTIONS = {
 
 # defaults to False
 # SENTRY_PUBLIC = False
+
+# workaround to not conflict with standard CSRF_COOKIE_NAME on same hostname
+CSRF_COOKIE_NAME = 'sentrycsrftoken'
