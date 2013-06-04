@@ -46,3 +46,7 @@ SENTRY_WEB_OPTIONS = {
 
 # workaround to not conflict with standard CSRF_COOKIE_NAME on same hostname
 CSRF_COOKIE_NAME = 'sentrycsrftoken'
+
+<% if @extra_cfg -%>
+<%= extra_cfg -%>
+<% end -%>

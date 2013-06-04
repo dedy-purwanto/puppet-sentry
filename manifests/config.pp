@@ -9,7 +9,8 @@ class sentry::config (
   $url_prefix = undef,
   $sub_url    = undef,
   $web_port   = 9000,
-  $workers    = 3
+  $workers    = 3,
+  $extra_cfg  = undef
 ) {
 
     include sentry::install

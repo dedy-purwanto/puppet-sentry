@@ -34,6 +34,8 @@
 #                 https://github.com/uggedal/puppet-module-python
 #
 #       [default] Using virtualenv directly, which will do sudo install
+# [*extra_cfg*]
+#       Extra configuration at the end of sentry.conf.py
 #
 # === Requires
 #
@@ -58,7 +60,8 @@ class sentry (
   $sub_url        = undef,
   $web_port       = 9000,
   $workers        = 3,
-  $install_method = undef
+  $install_method = undef,
+  $extra_cfg      = undef
 ) {
 
   class { 'sentry::install':
@@ -76,6 +79,7 @@ class sentry (
     sub_url    => $sub_url,
     web_port   => $web_port,
     workers    => $workers,
+    extra_cfg  => $extra_cfg,
   }
 
   class { 'sentry::service':
