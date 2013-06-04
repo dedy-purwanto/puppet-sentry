@@ -29,9 +29,12 @@ python-dateutil==1.5
 python-openid==2.2.5
 pytz==2012j
 raven==3.1.4
+requests==1.2.3
 sentry==5.1.5
 sentry-comments==0.1.0
+sentry-trello==1.1.4
 simplejson==3.0.7
 six==1.2.0
+trello==0.9.1
 wsgiref==0.1.2
 
