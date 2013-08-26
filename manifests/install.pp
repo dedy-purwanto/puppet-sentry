@@ -25,6 +25,14 @@ class sentry::install (
         group  => 'sentry',
     }
 
+    # this file will get created at some point; sentry needs to write
+    file { "${path}/sentry.db":
+        ensure => file,
+        owner  => 'sentry',
+        group  => 'sentry',
+    }
+
+
     case $method {
         'venv', 'default': {
             class { "sentry::install::${method}":
