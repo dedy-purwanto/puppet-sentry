@@ -17,11 +17,11 @@ DATABASES = {
 
 <% if @url_prefix -%>
 # No trailing slash!
-SENTRY_URL_PREFIX = '<%= url_prefix %><%= sub_url %>'
+SENTRY_URL_PREFIX = '<%= @url_prefix %><%= @sub_url %>'
 # see https://github.com/getsentry/sentry/issues/392#issuecomment-5106565
 <% if @sub_url -%>
-FORCE_SCRIPT_NAME = '<%= sub_url %>'
-SESSION_COOKIE_PATH = '<%= sub_url %>'
+FORCE_SCRIPT_NAME = '<%= @sub_url %>'
+SESSION_COOKIE_PATH = '<%= @sub_url %>'
 <% end -%>
 
 <% else -%>
@@ -33,12 +33,12 @@ SESSION_COOKIE_PATH = '<%= sub_url %>'
 
 # SENTRY_KEY is a unique randomly generated secret key for your server, and it
 # acts as a signing token
-SENTRY_KEY = '<%= key %>'
+SENTRY_KEY = '<%= @key %>'
 
 SENTRY_WEB_HOST = '0.0.0.0'
-SENTRY_WEB_PORT = <%= web_port %>
+SENTRY_WEB_PORT = <%= @web_port %>
 SENTRY_WEB_OPTIONS = {
-    'workers': <%= workers %>,  # the number of gunicorn workers
+    'workers': <%= @workers %>,  # the number of gunicorn workers
 }
 
 # defaults to False
@@ -48,5 +48,5 @@ SENTRY_WEB_OPTIONS = {
 CSRF_COOKIE_NAME = 'sentrycsrftoken'
 
 <% if @extra_cfg -%>
-<%= extra_cfg -%>
+<%= @extra_cfg -%>
 <% end -%>
