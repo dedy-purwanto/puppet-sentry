@@ -36,6 +36,10 @@
 #       [default] Using virtualenv directly, which will do sudo install
 # [*extra_cfg*]
 #       Extra configuration at the end of sentry.conf.py
+# [*monitor*]
+#       Whether to add monitoring of this service
+# [*monitor_tool*]
+#       Array of tools to monitor with; currently supports nagios.
 #
 # === Requires
 #
@@ -61,7 +65,9 @@ class sentry (
   $web_port       = 9000,
   $workers        = 3,
   $install_method = undef,
-  $extra_cfg      = undef
+  $extra_cfg      = undef,
+  $monitor        = true,
+  $monitor_tool   = ['nagios'],
 ) {
 
   class { 'sentry::install':
@@ -85,4 +91,11 @@ class sentry (
   class { 'sentry::service':
     path       => $path
   }
+
+  if (($monitor == true) and ($monitor_tool =~ /nagios/)) {
+    class { 'sentry::nagios':
+      web_port => $web_port
+    }
+  }
+  
 }
