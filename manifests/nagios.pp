@@ -7,6 +7,7 @@ class sentry::nagios (
   $web_port
 ) {
     nagios::service { "sentry_${::hostname}":
+    server        => "${::hostname}",
     check_command => 'check_http!-p 9100 localhost',
   }
 
