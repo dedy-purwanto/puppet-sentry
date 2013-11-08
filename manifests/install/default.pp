@@ -1,4 +1,7 @@
-class sentry::install::default($entry_path, $virtualenv_path) {
+class sentry::install::default(
+  $sentry_path,
+  $virtualenv_path
+) {
 
     file{"$sentry_path/requirements.txt":
         ensure => file,
