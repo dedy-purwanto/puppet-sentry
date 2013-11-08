@@ -2,6 +2,7 @@ class sentry::install::default(
   $sentry_path,
   $virtualenv_path
 ) {
+    include sentry::python
 
     file{"$sentry_path/requirements.txt":
         ensure => file,

@@ -2,9 +2,8 @@ class sentry::python(){
 
     $packages = ["python2.7", "python-dev", "python-setuptools"]
 
-    package{$packages:
-        ensure => installed,
-    }
+    # won't cause error if package was previously declared
+    ensure_packages($packages)
 
     exec{'pip_install':
         command => 'sudo easy_install pip',
