@@ -10,7 +10,6 @@ class sentry::service::supervisor (
   supervisor::service {
     'sentry':
       ensure      => present,
-      enable      => true,
       command     => "${virtualenv_path}/bin/sentry --config=${sentry_path}/sentry.conf.py start http",
       directory   => $sentry_path,
       user        => 'sentry',
