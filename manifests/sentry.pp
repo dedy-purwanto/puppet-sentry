@@ -31,7 +31,7 @@ class sentry::install($password, $salt="bf13c0"){
     file{"$sentry_path/requirements.txt":
         ensure => file,
         require => Exec[$sentry_path],
-        content => template("sentry/requirements.txt.erb")
+        source => "puppet:///modules/sentry/requirements.txt"
     }
 
     file{"$sentry_path/settings.py":
@@ -73,7 +73,7 @@ class sentry::install($password, $salt="bf13c0"){
 class sentry($password, $salt="bf13c0"){
     class{'sentry::python':}
     class{'sentry::install':
-        require => Class['sentry::python']
+        require => Class['sentry::python'],
         password => $password,
         salt => $salt,
     }
