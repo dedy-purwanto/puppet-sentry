@@ -10,11 +10,12 @@ class sentry::config (
   $sub_url    = undef,
   $web_port   = 9000,
   $workers    = 3,
-  $extra_cfg  = undef
+  $extra_cfg  = undef,
+  $load_initial_data = true,
+
 ) {
 
     include sentry::install
-
 
     $virtualenv_path = "$path/virtualenv"
 
@@ -25,15 +26,18 @@ class sentry::config (
         content => template("sentry/sentry.conf.py.erb"),
         owner   => $owner,
         group   => $group,
-        notify  => Class['sentry::service'],
+        notify  => Exec['sentry_initiate'],
     }
 
-    file{"$path/initial_data.json":
+    if $load_initial_data {
+      file{"$path/initial_data.json":
         ensure  => file,
         content => template("sentry/initial_data.json.erb"),
         notify  => Exec['sentry_initiate'],
         owner   => $owner,
-        group   => $group
+        group   => $group,
+        before  => Exec['sentry_initiate'],
+      }
     }
 
     exec{"sentry_initiate":
@@ -42,10 +46,8 @@ class sentry::config (
         group       => $group,
         refreshonly => true,
         logoutput   => on_failure,
-        require     => [
-            File["$path/initial_data.json"],
-            Class["sentry::install"]
-        ],
+        require     => Class["sentry::install"],
+        notify  => Class['sentry::service'],
         timeout => 0, /* sentry syncdb and migration takes a long time, better make the timeout to be infinite */
     }
 }

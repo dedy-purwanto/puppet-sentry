@@ -1,6 +1,7 @@
 class sentry::install (
   $method = undef,
-  $path   = '/var/sentry'
+  $path   = '/var/sentry',
+  $requirements_source = undef
 ) {
     $virtualenv_path = "${path}/virtualenv"
 
@@ -37,7 +38,8 @@ class sentry::install (
         'venv', 'default': {
             class { "sentry::install::${method}":
                 sentry_path     => $path,
-                virtualenv_path => $virtualenv_path
+                virtualenv_path => $virtualenv_path,
+                requirements_source => $requirements_source,
             }
         }
         default: {

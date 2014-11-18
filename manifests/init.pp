@@ -40,6 +40,19 @@
 #       Whether to add monitoring of this service
 # [*monitor_tool*]
 #       Array of tools to monitor with; currently supports nagios.
+# [*load_initial_data*]
+#       Should initial_data.json be created (default: true).
+#       You will have to disable this to install new version of sentry (6.X),
+#       because it uses a custom model for User, and this need to be created
+#       after migrations have run.
+#
+#       Caution: setting this to false will ignore the other options:
+#                password, salt
+# [*requirements_source*]
+#       Use customer requirements.txt file. This option allows installing a
+#       different version of sentry than 5.1.5, which is the default for this
+#       module. To install the latest available version of sentry, just pass
+#       a file with just one line "sentry" without specifying the version.
 #
 # === Requires
 #
@@ -68,11 +81,14 @@ class sentry (
   $extra_cfg      = undef,
   $monitor        = true,
   $monitor_tool   = ['nagios'],
+  $load_initial_data = true,
+  $requirements_source = "puppet:///modules/sentry/requirements.txt"
 ) {
 
   class { 'sentry::install':
     method => $install_method,
-    path   => $path
+    path   => $path,
+    requirements_source => $requirements_source,
   }
 
   class { 'sentry::config':
@@ -86,6 +102,7 @@ class sentry (
     web_port   => $web_port,
     workers    => $workers,
     extra_cfg  => $extra_cfg,
+    load_initial_data => $load_initial_data,
   }
 
   class { 'sentry::service':
@@ -97,5 +114,5 @@ class sentry (
       web_port => $web_port
     }
   }
-  
+
 }

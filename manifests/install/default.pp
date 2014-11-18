@@ -1,14 +1,14 @@
 class sentry::install::default(
   $sentry_path,
-  $virtualenv_path
+  $virtualenv_path,
+  $requirements_source
 ) {
     include sentry::python
 
     file{"$sentry_path/requirements.txt":
         ensure => file,
-        source => "puppet:///modules/sentry/requirements.txt"
+        source => $requirements_source
     }
-
 
     exec{"virtualenv":
         command => "virtualenv $virtualenv_path",

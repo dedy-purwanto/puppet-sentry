@@ -17,8 +17,15 @@ This class installs/configures/manages Sentry.
 [*url_prefix*]
       The url prefix sentry is accessible on.  If undefined, it is guessed,
       but when using a proxy you probably want to set this.
+      This should contain the protocol and hostname part; e.g.
+      https://myhost
+[*sub_url*]
+      The sub url sentry is accessible on on the given url_prefix.
+      Start with a slash, end without.
 [*web_port*]
       The port the web server will listen on.
+[*workers*]
+      The number of gunicorn workers to start
 [*install_method*]
       The installation method used to install sentry.
       Choose from:
@@ -27,6 +34,25 @@ This class installs/configures/manages Sentry.
                 https://github.com/uggedal/puppet-module-python
 
       [default] Using virtualenv directly, which will do sudo install
+[*extra_cfg*]
+      Extra configuration at the end of sentry.conf.py
+[*monitor*]
+      Whether to add monitoring of this service
+[*monitor_tool*]
+      Array of tools to monitor with; currently supports nagios.
+[*load_initial_data*]
+      Should initial_data.json be created (default: true).
+      You will have to disable this to install new version of sentry (6.X),
+      because it uses a custom model for User, and this need to be created
+      after migrations have run.
+
+      Caution: setting this to false will ignore the other options:
+               password, salt
+[*requirements_source*]
+      Use customer requirements.txt file. This option allows installing a
+      different version of sentry than 5.1.5, which is the default for this
+      module. To install the latest available version of sentry, just pass
+      a file with just one line "sentry" without specifying the version.
 
 === Requires
 
