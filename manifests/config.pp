@@ -39,11 +39,6 @@ class sentry::config (
         before  => Exec['sentry_initiate'],
       }
     }
-    else
-    {
-            realize Exec['sentry_initiate']
-    }
-
 
     exec{"sentry_initiate":
         command     => "bash -c 'source $virtualenv_path/bin/activate && sentry --config=$path/sentry.conf.py upgrade --noinput'",
