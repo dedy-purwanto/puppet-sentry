@@ -26,7 +26,7 @@ class sentry::config (
         content => template("sentry/sentry.conf.py.erb"),
         owner   => $owner,
         group   => $group,
-        notify  => Class['sentry::service'],
+        notify  => Exec['sentry_initiate'],
     }
 
     if $load_initial_data {
@@ -52,6 +52,7 @@ class sentry::config (
         refreshonly => true,
         logoutput   => on_failure,
         require     => Class["sentry::install"],
+        notify  => Class['sentry::service'],
         timeout => 0, /* sentry syncdb and migration takes a long time, better make the timeout to be infinite */
     }
 }

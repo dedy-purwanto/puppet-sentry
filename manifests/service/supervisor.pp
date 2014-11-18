@@ -14,7 +14,7 @@ class sentry::service::supervisor (
       directory   => $sentry_path,
       user        => 'sentry',
       group       => 'sentry',
-      require     => [ Class['sentry::install'] ]
+      require     => [ Exec['sentry_initiate'] ]
   }
 
 }
